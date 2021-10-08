@@ -13,9 +13,10 @@ class DBClient {
     client.connect((error) => {
       if (error) {
 	this.status = false;
+      } else {
+        this.status = true;
+        this.db = client.db(database);
       }
-      this.status = true;
-      this.db = client.db(database);
     });
   }
 
