@@ -19,17 +19,16 @@ export default class UsersController {
         return res.status(400).send({ error: 'Already exist' });
       }
 
-      let userId;
-      const hashedPw = sha1(userPassword);
-      const newUser = { email: userEmail, password: hashedPw };
+      const hashedPassword = sha1(userPassword);
+      const newUser = { email: userEmail, password: hashedPassword };
 
       try {
         await dbClient.db.collection('users').insertOne(newUser, (err) => {
-          userId = newUser._id;
-          return res.status(201).send({ email: userEmail, id: userId });
+          const userId = newUser._id;
+          return res.status(201).send({ id: userId, email: userEmail });
         });
-      } catch (err) {
-        return res.status(err.status).send({ 'error': err });
+      } catch (error) {
+        return res.status(error.status).send({ 'error': error });
       }
     } catch (error) {
       return res.status(500).send({ error: 'Server error' });
