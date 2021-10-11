@@ -15,7 +15,7 @@ class RedisClient {
     return this.client.connected;
   }
 
-  async get(key) { 
+  async get(key) {
     return this.client.get(key);
   }
 
@@ -29,4 +29,4 @@ class RedisClient {
 }
 
 const redisClient = new RedisClient();
-export default redisClient;
+export default redisClient
