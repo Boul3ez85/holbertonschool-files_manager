@@ -1,13 +1,12 @@
 const redis = require('redis');
 const { promisify } = require('util');
 
-
 class RedisClient {
   constructor() {
     this.client = redis.createClient();
-    this.getClient = promisify(this.getClient).bind(this.client);
+    this.client.get = promisify(this.client.get).bind(this.client);
     this.client.on('error', (error) => {
-      console.log(error);
+      console.log(`Redis client not connected to the server: ${error.message}`);
     });
   }
 
