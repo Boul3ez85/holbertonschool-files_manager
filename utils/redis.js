@@ -1,9 +1,9 @@
-import redis from 'redis';
+import { createClient } from 'redis';
 const { promisify } = require('util');
 
 class RedisClient {
   constructor() {
-    this.client = redis.createClient();
+    this.client = createClient();
     this.client.get = promisify(this.client.get).bind(this.client);
     this.client.on('error', (error) => {
       console.log(error);
