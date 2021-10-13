@@ -16,13 +16,13 @@ class RedisClient {
     return this.client.connected;
   }
 
-// getter
+// getter function
   async get(key) {
     const value = await this.getAsync(key);
     return value;
   }
 
-// setter
+// setter function
   async set(key, value, duration) {
     this.client.set(key, value);
     this.client.expire(key, duration);
