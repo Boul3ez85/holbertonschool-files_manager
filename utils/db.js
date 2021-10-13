@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 const { ObjectID } = require('mongodb');
 
-
+// constructor that creates a client to MongoDB
 class DBClient {
   constructor() {
     const host = process.env.DB_HOST || 'localhost';
@@ -21,14 +21,17 @@ class DBClient {
     });
   }
 
+  // connection to MongoDB
   isAlive() {
     return this.status;
   }
 
+  // documents in the collection users
   async nbUsers() {
     return this.db.collection('users').countDocuments();
   }
 
+  // documents in the collection files
   async nbFiles() {
     return this.db.collection('files').countDocuments();
   }
